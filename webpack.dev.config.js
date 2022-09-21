@@ -1,18 +1,31 @@
-var path = require('path')
-var TerserPlugin = require('terser-webpack-plugin')
-var MiniCssExtractPlugin = require('mini-css-extract-plugin')
-var { CleanWebpackPlugin } = require('clean-webpack-plugin')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 
 module.exports = {
     entry: './src/index.js',
     output: {
-        filename: 'bundle.[contenthash].js',
+        filename: 'bundle.js',
         path: path.resolve(__dirname, './dist'),
         publicPath: ''
     },
-    mode: 'none',
+    mode: 'development',
+    devServer: {
+        static: {
+            directory: path.resolve(__dirname, './dist'),
+        },
+        port: 9000,
+        compress: true,
+    //     open:{target: ['index.html'],
+    //   app: {
+    //     name: 'google-chrome',
+    //     arguments: ['--incognito', '--new-window'],
+    //   },}
+            
+
+
+    }, //  none | development | production
     module: {
         rules: [
             {
@@ -31,7 +44,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    MiniCssExtractPlugin.loader, 'css-loader'
+                    'style-loader', 'css-loader'
                 ]
             },
             // {
@@ -53,8 +66,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new TerserPlugin(),
-        new MiniCssExtractPlugin({ filename: 'styles.[contenthash].css'}),
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             title: 'Home',

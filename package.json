@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "build": "webpack"
+    "dev": "webpack serve --config webpack.dev.config.js --hot",
+    "build": "webpack --config webpack.production.config.js",
+    "": ""
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "mini-css-extract-plugin": "^2.6.1",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.6",
-    "webpack-cli": "^4.10.0"
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.1"
   }
 }
